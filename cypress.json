@@ -1,5 +1,6 @@
 {
   "viewportWidth": 1280,
   "viewportHeight": 720,
-  "video": false
+  "video": false,
+  "pageLoadTimeout": 10000
 }
