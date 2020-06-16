@@ -2,7 +2,12 @@ import Regex from '../support/Regex';
 
 describe('Main UI', () => {
 	before(() => {
-		cy.setCookie('galactae-phpsessid', '***REMOVED***');
+		if (Cypress.isBrowser('chrome')) {
+			cy.setCookie('galactae-phpsessid', '***REMOVED***');
+		} else if (Cypress.isBrowser('firefox')) {
+			cy.setCookie('galactae-phpsessid', '***REMOVED***');
+		}
+
 		cy.visit('http://00-dev.galactae.eu');
 
 		cy.get('#loading-overlay-back').should('not.be.visible');
