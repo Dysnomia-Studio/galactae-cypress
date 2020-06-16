@@ -1,0 +1,27 @@
+kind: pipeline
+name: galactae-cypress
+
+steps:
+- name: tests
+  image: cypress/browsers:node13.8.0-chrome81-ff75
+  commands:
+  - npx cypress run --browser chrome
+  - npx cypress run --browser firefox
+
+- name: discord
+  pull: default
+  image: appleboy/drone-discord
+  settings:
+    webhook_id: ***REMOVED***
+    webhook_token: ***REMOVED***
+    message: >
+      {{#success build.status}}
+        Automated clientside end-to-end tests succeded
+      {{else}}
+        Automated clientside end-to-end tests failed
+      {{/success}}
+  when:
+    status: 
+    - changed
+    - failure
+    - success
