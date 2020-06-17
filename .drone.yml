@@ -6,9 +6,16 @@ steps:
   image: cypress/browsers:node13.8.0-chrome81-ff75
   commands:
   - npm ci
-#  - $(npm bin)/cypress run --headless
   - $(npm bin)/cypress run --browser firefox
   - $(npm bin)/cypress run --browser chrome
+
+- name: tests
+  image: cypress/browsers:node12.13.0-chrome78-ff70-brave78
+  commands:
+  - npm ci
+  - $(npm bin)/cypress run --browser firefox
+  - $(npm bin)/cypress run --browser chrome
+  - $(npm bin)/cypress run --browser brave
 
 - name: discord
   pull: default
