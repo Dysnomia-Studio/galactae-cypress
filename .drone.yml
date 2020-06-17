@@ -8,7 +8,7 @@ steps:
   - npm ci
   - $(npm bin)/cypress run --browser firefox
   - $(npm bin)/cypress run --browser chrome
-  
+
 - name: tests-chrome81-ff75
   image: cypress/browsers:node13.8.0-chrome81-ff75
   commands:
@@ -24,7 +24,7 @@ steps:
   - $(npm bin)/cypress run --browser chrome
 
 - name: tests-chrome67-ff57
-  image: cypress/browsers:node12.13.0-chrome67-ff57
+  image: cypress/browsers:chrome67-ff57
   commands:
   - npm ci
   - $(npm bin)/cypress run --browser firefox
