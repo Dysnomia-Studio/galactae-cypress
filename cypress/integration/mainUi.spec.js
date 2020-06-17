@@ -19,7 +19,7 @@ describe('Main UI', () => {
 			cy.setCookie('galactae-phpsessid', '***REMOVED***');
 		}
 
-		cy.visit('http://00-dev.galactae.eu');
+		cy.visit('https://00-dev.galactae.eu');
 
 		cy.get('#loading-overlay-back').should('not.be.visible');
 

@@ -6,7 +6,7 @@ steps:
   image: cypress/browsers:node13.8.0-chrome81-ff75
   commands:
   - npm ci
-  - $(npm bin)/cypress run
+  - $(npm bin)/cypress run --headless
 #  - $(npm bin)/cypress run --browser chrome
 #  - $(npm bin)/cypress run --browser firefox
 
