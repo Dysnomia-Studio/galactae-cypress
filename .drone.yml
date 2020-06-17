@@ -10,21 +10,6 @@ steps:
 #  - $(npm bin)/cypress run --browser chrome
 #  - $(npm bin)/cypress run --browser firefox
 
-- name: gitea_release
-  image: plugins/gitea-release
-  settings:
-    api_key: ***REMOVED***
-    base_url: ***REMOVED***
-    files:
-      - /drone/src/cypress/screenshots/*.png
-  checksum:
-    - md5
-  when:
-    status: 
-    - changed
-    - failure
-    - success
-      
 - name: discord
   pull: default
   image: appleboy/drone-discord

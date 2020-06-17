@@ -2,13 +2,20 @@ import Regex from '../support/Regex';
 
 describe('Main UI', () => {
 	before(() => {
+		cy.log(Cypress.platform);
+		cy.log(Cypress.browser);
+
 		if(Cypress.platform === 'win32') { // Dev computer
+			cy.log(1);
 			cy.setCookie('galactae-phpsessid', '***REMOVED***');
 		} else if (Cypress.isBrowser('chrome')) { // CI Chrome
+			cy.log(2);
 			cy.setCookie('galactae-phpsessid', '***REMOVED***');
 		} else if (Cypress.isBrowser('firefox')) { // CI Firefox
+			cy.log(3);
 			cy.setCookie('galactae-phpsessid', '***REMOVED***');
 		} else if (Cypress.isBrowser('electron')) { // CI Electron
+			cy.log(4);
 			cy.setCookie('galactae-phpsessid', '***REMOVED***');
 		}
 
