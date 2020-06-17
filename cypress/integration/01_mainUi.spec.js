@@ -24,6 +24,10 @@ describe('Main UI', () => {
 		cy.get('#loading-overlay-back').should('not.be.visible');
 
 		cy.get('#tutorial-panel-ok').click();
+		cy.get('#tutorial-panel').should('not.be.visible');
+
+		cy.get('#day-bonus-confirm').click({ force: true });
+		cy.get('#day-bonus').should('not.be.visible');
 	});
 
 	context('Top Left HUD', () => {
