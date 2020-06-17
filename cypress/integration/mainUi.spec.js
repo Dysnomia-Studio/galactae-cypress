@@ -2,9 +2,11 @@ import Regex from '../support/Regex';
 
 describe('Main UI', () => {
 	before(() => {
-		if (Cypress.isBrowser('chrome')) {
+		if(Cypress.platform === 'win32') { // Dev computer
 			cy.setCookie('galactae-phpsessid', '***REMOVED***');
-		} else if (Cypress.isBrowser('firefox')) {
+		} else if (Cypress.isBrowser('chrome')) { // CI Chrome
+			cy.setCookie('galactae-phpsessid', '***REMOVED***');
+		} else if (Cypress.isBrowser('firefox')) { // CI Firefox
 			cy.setCookie('galactae-phpsessid', '***REMOVED***');
 		}
 
