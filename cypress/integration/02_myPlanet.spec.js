@@ -19,5 +19,13 @@ describe('My planet', () => {
 			cy.get('#lvl-trade').contains(Regex.isNumber);
 			cy.get('#lvl-he3exp').contains(Regex.isNumber);
 		});
+
+		it('Has tutorial designing solar panel', () => {
+			cy.get('#solar').should('have.class', 'tutorial-active');
+
+			cy.get('#solar').click();
+
+			cy.get('#solar').should('not.have.class', 'tutorial-active');
+		});
 	});
 });
