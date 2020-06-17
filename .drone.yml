@@ -7,8 +7,8 @@ steps:
   commands:
   - npm ci
 #  - $(npm bin)/cypress run --headless
-#  - $(npm bin)/cypress run --browser chrome
   - $(npm bin)/cypress run --browser firefox
+  - $(npm bin)/cypress run --browser chrome
 
 - name: discord
   pull: default
