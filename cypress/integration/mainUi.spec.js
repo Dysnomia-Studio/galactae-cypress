@@ -8,6 +8,8 @@ describe('Main UI', () => {
 			cy.setCookie('galactae-phpsessid', '***REMOVED***');
 		} else if (Cypress.isBrowser('firefox')) { // CI Firefox
 			cy.setCookie('galactae-phpsessid', '***REMOVED***');
+		} else if (Cypress.isBrowser('electron')) { // CI Electron
+			cy.setCookie('galactae-phpsessid', '***REMOVED***');
 		}
 
 		cy.visit('http://00-dev.galactae.eu');
