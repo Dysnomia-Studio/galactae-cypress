@@ -2,5 +2,5 @@
   "viewportWidth": 1280,
   "viewportHeight": 720,
   "video": false,
-  "pageLoadTimeout": 10000
+  "pageLoadTimeout": 60000
 }
