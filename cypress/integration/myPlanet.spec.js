@@ -1,6 +1,10 @@
 import Regex from '../support/Regex';
 
 describe('My planet', () => {
+	before(() => {
+		cy.connect('https://00-dev.galactae.eu');
+	});
+
 	context('Building informations', () => {
 		it('Has valid building level', () => {
 			cy.get('#lvl-carriere').contains(Regex.isNumber);

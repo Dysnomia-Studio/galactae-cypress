@@ -23,3 +23,41 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=false) => {
+	cy.url().then(currUrl => {
+		cy.log(currUrl);
+
+		if(!exactURLMatch && currUrl.startsWith(destinationUrl)) {
+			return;
+		}
+
+		if(exactURLMatch && currUrl === destinationUrl) {
+			return;
+		}
+
+		if(Cypress.platform === 'win32') { // Dev computer
+			cy.setCookie('galactae-phpsessid', '***REMOVED***');
+
+		} else if (Cypress.isBrowser('chrome')) { // CI Chrome
+			cy.setCookie('galactae-phpsessid', '***REMOVED***');
+
+		} else if (Cypress.isBrowser('firefox')) { // CI Firefox
+			cy.setCookie('galactae-phpsessid', '***REMOVED***');
+
+		} else if (Cypress.isBrowser('electron')) { // CI Electron
+			cy.setCookie('galactae-phpsessid', '***REMOVED***');
+
+		}
+
+		cy.visit(destinationUrl);
+
+		cy.get('#loading-overlay-back').should('not.be.visible');
+
+		cy.get('#tutorial-panel-ok').click();
+		cy.get('#tutorial-panel').should('not.be.visible');
+
+		cy.get('#day-bonus-confirm').click({ force: true });
+		cy.get('#day-bonus').should('not.be.visible');
+	});
+});
