@@ -36,6 +36,7 @@ Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=false) => {
 			return;
 		}
 
+		// Assign user cookie
 		if(Cypress.platform === 'win32') { // Dev computer
 			cy.setCookie('galactae-phpsessid', '***REMOVED***');
 
@@ -50,8 +51,14 @@ Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=false) => {
 
 		}
 
+		// Prevent having sound while testing
+		cy.setCookie('galactae_settings_sounds_musicVol', '0');
+		cy.setCookie('galactae_settings_sounds_soundLvl', '0');
+
+		// Visit
 		cy.visit(destinationUrl);
 
+		// On load end
 		cy.get('#loading-overlay-back').should('not.be.visible');
 
 		cy.get('#tutorial-panel-ok').click();
