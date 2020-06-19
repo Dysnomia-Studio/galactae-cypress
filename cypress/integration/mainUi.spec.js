@@ -43,8 +43,47 @@ describe('Main UI', () => {
 	});
 
 	context('Top Center HUD', () => {
-		it('Should display planet name', () => {
+		it('Can rename planet (Click outside)', () => {
 			cy.get('#hud-planet-name').should('not.be.empty');
+
+			cy.get('#hud-planet-name').should('have.prop', 'tagName' ).should('eq', 'SPAN');
+
+			cy.get('#hud-planet-name').click();
+
+			cy.get('#hud-planet-name').should('have.prop', 'tagName' ).should('eq', 'INPUT');
+
+			const newName = 'Planete - ' + Date.now();
+
+			cy.get('#hud-planet-name')
+				.clear()
+				.type(newName)
+				.should('have.value', newName);
+
+			cy.get('#planet-current').click();
+
+			cy.get('#hud-planet-name').should('have.prop', 'tagName' ).should('eq', 'SPAN');
+
+			cy.get('#hud-planet-name').contains(newName);
+		});
+
+		it('Can rename planet (Enter key)', () => {
+			cy.get('#hud-planet-name').should('not.be.empty');
+
+			cy.get('#hud-planet-name').should('have.prop', 'tagName' ).should('eq', 'SPAN');
+
+			cy.get('#hud-planet-name').click();
+
+			cy.get('#hud-planet-name').should('have.prop', 'tagName' ).should('eq', 'INPUT');
+
+			const newName = 'Planete - ' + Date.now();
+
+			cy.get('#hud-planet-name')
+				.clear()
+				.type(newName + '{enter}');
+
+			cy.get('#hud-planet-name').should('have.prop', 'tagName' ).should('eq', 'SPAN');
+
+			cy.get('#hud-planet-name').contains(newName);
 		});
 	});
 
