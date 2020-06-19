@@ -1,5 +1,23 @@
 import Regex from '../support/Regex';
 
+const buildingsNames = [
+	'carriere',
+	'metallurgy',
+	'living',
+	'serre',
+	'solar',
+	'warehouse',
+	'headquarter',
+	'launchpad',
+	'research',
+
+	'radar',
+	'tank',
+	'shipyard',
+	'trade',
+	'he3exp',
+];
+
 describe('My planet', () => {
 	before(() => {
 		cy.connect('https://00-dev.galactae.eu');
@@ -7,21 +25,9 @@ describe('My planet', () => {
 
 	context('Building informations', () => {
 		it('Has valid building level', () => {
-			cy.get('#lvl-carriere').contains(Regex.isNumber);
-			cy.get('#lvl-metallurgy').contains(Regex.isNumber);
-			cy.get('#lvl-living').contains(Regex.isNumber);
-			cy.get('#lvl-serre').contains(Regex.isNumber);
-			cy.get('#lvl-solar').contains(Regex.isNumber);
-			cy.get('#lvl-warehouse').contains(Regex.isNumber);
-			cy.get('#lvl-headquarter').contains(Regex.isNumber);
-			cy.get('#lvl-launchpad').contains(Regex.isNumber);
-			cy.get('#lvl-research').contains(Regex.isNumber);
-
-			cy.get('#lvl-radar').contains(Regex.isNumber);
-			cy.get('#lvl-tank').contains(Regex.isNumber);
-			cy.get('#lvl-shipyard').contains(Regex.isNumber);
-			cy.get('#lvl-trade').contains(Regex.isNumber);
-			cy.get('#lvl-he3exp').contains(Regex.isNumber);
+			for(const buildingsName of buildingsNames) {
+				cy.get('#lvl-' + buildingsName).contains(Regex.isNumber);
+			}
 		});
 
 		it('Has tutorial designing solar panel', () => {
@@ -30,6 +36,24 @@ describe('My planet', () => {
 			cy.get('#solar').click();
 
 			cy.get('#solar').should('not.have.class', 'tutorial-active');
+
+			cy.get('#building-quit').click();
 		});
+
+		for(const buildingsName of buildingsNames) {
+			it('Opens building panel - ' + buildingsName, () => {
+				cy.get('#building-area').should('not.be.visible');
+
+				cy.get('#' + buildingsName).click();
+
+				cy.get('#building-area').should('be.visible');
+
+				cy.get('#building-img').invoke('attr', 'src').should('eq', './cdn/img/buildings/desc/' + buildingsName + '.jpg');
+
+				cy.get('#building-quit').click();
+
+				cy.get('#building-area').should('not.be.visible');
+			});
+		}
 	});
 });
