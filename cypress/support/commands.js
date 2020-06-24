@@ -61,7 +61,7 @@ Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=false) => {
 		// On load end
 		cy.get('#loading-overlay-back').should('not.be.visible');
 
-		cy.get('#tutorial-panel-ok').click({ force: true });
+		cy.get('#tutorial-panel-ok').click();
 		cy.get('#tutorial-panel').should('not.be.visible');
 
 		cy.get('#day-bonus-confirm').click({ force: true });
