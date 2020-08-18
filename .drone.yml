@@ -34,7 +34,6 @@ steps:
   image: cypress/browsers:chrome67-ff57
   commands:
   - npm ci
-  - $(npm bin)/cypress run --browser firefox
   - $(npm bin)/cypress run --browser chrome
 
 - name: discord
