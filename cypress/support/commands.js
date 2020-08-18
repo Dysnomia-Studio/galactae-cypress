@@ -55,8 +55,12 @@ Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=false) => {
 		cy.setCookie('galactae_settings_sounds_musicVol', '0');
 		cy.setCookie('galactae_settings_sounds_soundLvl', '0');
 
+		cy.wait(500);
+
 		// Visit
 		cy.visit(destinationUrl);
+
+		cy.wait(500);
 
 		// On load end
 		cy.get('#loading-overlay-back').should('not.be.visible');
