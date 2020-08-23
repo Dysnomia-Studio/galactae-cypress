@@ -39,7 +39,7 @@ describe('Ranks', () => {
 		it('Have a blue name', () => {
 			cy.get('#hud-bottom-button-ranks').click();
 
-			cy.get('#rank-name em').should('have.text', 'ElanisTest');
+			cy.get('.rank-name em').should('have.text', 'ElanisTest');
 
 			cy.get('#hud-ranks-close').click({ force: true });
 		});
