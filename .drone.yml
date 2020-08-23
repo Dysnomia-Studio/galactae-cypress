@@ -44,9 +44,9 @@ steps:
     webhook_token: ***REMOVED***
     message: >
       {{#success build.status}}
-        Automated clientside end-to-end tests succeded
+        **GALACTAE:** Automated clientside end-to-end tests succeded
       {{else}}
-        Automated clientside end-to-end tests failed
+        **GALACTAE:** Automated clientside end-to-end tests failed
       {{/success}}
   when:
     status: 
