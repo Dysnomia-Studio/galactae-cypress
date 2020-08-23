@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=false) => {
+Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=false, tutorialCheck=true) => {
 	cy.url().then(currUrl => {
 		cy.log(currUrl);
 
@@ -62,13 +62,15 @@ Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=false) => {
 
 		cy.wait(500);
 
-		// On load end
-		cy.get('#loading-overlay-back').should('not.be.visible');
+		if(tutorialCheck) {
+			// On load end
+			cy.get('#loading-overlay-back').should('not.be.visible');
 
-		cy.get('#tutorial-panel-ok').click();
-		cy.get('#tutorial-panel').should('not.be.visible');
+			cy.get('#tutorial-panel-ok').click();
+			cy.get('#tutorial-panel').should('not.be.visible');
 
-		cy.get('#day-bonus-confirm').click({ force: true });
-		cy.get('#day-bonus').should('not.be.visible');
+			cy.get('#day-bonus-confirm').click({ force: true });
+			cy.get('#day-bonus').should('not.be.visible');
+		}
 	});
 });

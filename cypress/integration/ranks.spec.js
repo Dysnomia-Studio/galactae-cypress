@@ -49,7 +49,7 @@ describe('Ranks', () => {
 		});
 
 		it('Have a blue name', () => {
-			cy.connect('https://00-dev.galactae.eu/ranks.php');
+			cy.connect('https://00-dev.galactae.eu/ranks.php', false, false);
 
 			cy.get('.rank-name em').should('have.text', 'ElanisTest');
 		});
