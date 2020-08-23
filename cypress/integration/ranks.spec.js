@@ -36,14 +36,6 @@ describe('Ranks', () => {
 	});
 
 	context('Test interface', () => {
-		it('Have a blue name', () => {
-			cy.get('#hud-bottom-button-ranks').click();
-
-			cy.get('.rank-name em').should('have.text', 'ElanisTest');
-
-			cy.get('#hud-ranks-close').click({ force: true });
-		});
-
 		it('Can switch to alliance ranks', () => {
 			cy.get('#hud-bottom-button-ranks').click();
 
@@ -54,6 +46,12 @@ describe('Ranks', () => {
 			cy.get('#hud-ranks-frame').should('have.attr', 'src').should('include', 'ranks.php?type=ally');
 
 			cy.get('#hud-ranks-close').click({ force: true });
+		});
+
+		it('Have a blue name', () => {
+			cy.connect('https://00-dev.galactae.eu/ranks.php');
+
+			cy.get('.rank-name em').should('have.text', 'ElanisTest');
 		});
 	});
 });
