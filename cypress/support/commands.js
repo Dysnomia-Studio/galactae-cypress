@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=false, tutorialCheck=true) => {
+Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=true, tutorialCheck=true) => {
 	cy.url().then(currUrl => {
 		cy.log(currUrl);
 
