@@ -2,7 +2,8 @@
   "viewportWidth": 1280,
   "viewportHeight": 720,
   "video": false,
-  "pageLoadTimeout": 60000,
+  "screenshotOnRunFailure": false,
+  "numTestsKeptInMemory": 0,
   "firefoxGcInterval": {
     "runMode": null,
     "openMode": null
