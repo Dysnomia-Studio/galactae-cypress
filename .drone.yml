@@ -30,12 +30,6 @@ steps:
   - $(npm bin)/cypress run --browser firefox
   - $(npm bin)/cypress run --browser chrome
 
-- name: tests-chrome67-ff57
-  image: cypress/browsers:chrome67-ff57
-  commands:
-  - npm ci
-  - $(npm bin)/cypress run --browser chrome
-
 - name: discord
   pull: default
   image: appleboy/drone-discord
