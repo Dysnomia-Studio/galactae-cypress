@@ -26,8 +26,6 @@
 
 Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=true, tutorialCheck=true) => {
 	cy.url().then(currUrl => {
-		cy.log(currUrl);
-
 		if(!exactURLMatch && currUrl.startsWith(destinationUrl)) {
 			return;
 		}
@@ -63,14 +61,93 @@ Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=true, tutorialChe
 		cy.wait(500);
 
 		if(tutorialCheck) {
-			// On load end
-			cy.get('#loading-overlay-back').should('not.be.visible');
+			cy.clickWithChecks(
+				'#tutorial-panel-ok', {
+					invisibleBefore: ['#loading-overlay-back'],
+					visibleBefore: [],
 
-			cy.get('#tutorial-panel-ok').click();
-			cy.get('#tutorial-panel').should('not.be.visible');
+					invisibleAfter: ['#tutorial-panel'],
+					visibleAfter: [],
+				}
+			);
 
-			cy.get('#day-bonus-confirm').click({ force: true });
-			cy.get('#day-bonus').should('not.be.visible');
+			cy.clickWithChecks(
+				'#day-bonus-confirm', {
+					invisibleBefore: [],
+					visibleBefore: [],
+
+					invisibleAfter: ['#day-bonus'],
+					visibleAfter: [],
+				},
+				true
+			);
 		}
 	});
+});
+
+Cypress.Commands.add('clickWithChecks', (
+	button,
+	{ visibleBefore, invisibleBefore, visibleAfter, invisibleAfter },
+	force=false
+) => {
+
+	for(const selector of visibleBefore) {
+		cy.get(selector).should('be.visible');
+	}
+
+	for(const selector of invisibleBefore) {
+		cy.get(selector).should('not.be.visible');
+	}
+
+	cy.get(button).click({ force });
+
+	for(const selector of visibleAfter) {
+		cy.get(selector).should('be.visible');
+	}
+
+	for(const selector of invisibleAfter) {
+		cy.get(selector).should('not.be.visible');
+	}
+});
+
+Cypress.Commands.add('togglePanelWithCloseBtn', (
+	button,
+	closeButton,
+	panels,
+	force=false,
+) => {
+	cy.clickWithChecks(
+		button, {
+			invisibleBefore: panels,
+			visibleBefore: [],
+
+			invisibleAfter: [],
+			visibleAfter: panels,
+		},
+		force
+	);
+
+	cy.clickWithChecks(
+		closeButton, {
+			invisibleBefore: [],
+			visibleBefore: panels,
+
+			invisibleAfter: panels,
+			visibleAfter: [],
+		},
+		force
+	);
+});
+
+Cypress.Commands.add('togglePanel', (
+	button,
+	panels,
+	force=false,
+) => {
+	cy.togglePanelWithCloseBtn(
+		button,
+		button,
+		panels,
+		force
+	);
 });
