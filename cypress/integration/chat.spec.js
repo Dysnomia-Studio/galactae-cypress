@@ -5,42 +5,63 @@ describe('Chat', () => {
 
 	context('Buttons', () => {
 		it('Show/Hide (Bottom button)', () => {
-			cy.get('#hud-chat').should('be.visible');
-			//cy.get('#hud-bottom-button-chat').should('have.class', 'hud-bottom-active');
+			// cy.get('#hud-bottom-button-chat').should('have.class', 'hud-bottom-active');
 
-			cy.get('#hud-bottom-button-chat').click();
+			cy.clickWithChecks(
+				'#hud-bottom-button-chat', {
+					invisibleBefore: [],
+					visibleBefore: ['#hud-chat'],
 
-			cy.get('#hud-chat').should('not.be.visible');
+					invisibleAfter: ['#hud-chat'],
+					visibleAfter: [],
+				}
+			);
+
 			cy.get('#hud-bottom-button-chat').should('not.have.class', 'hud-bottom-active');
 
-			cy.get('#hud-bottom-button-chat').click();
+			cy.clickWithChecks(
+				'#hud-bottom-button-chat', {
+					invisibleBefore: ['#hud-chat'],
+					visibleBefore: [],
 
-			cy.get('#hud-chat').should('be.visible');
+					invisibleAfter: [],
+					visibleAfter: ['#hud-chat'],
+				}
+			);
+
 			cy.get('#hud-bottom-button-chat').should('have.class', 'hud-bottom-active');
 		});
 
 		it('Change channels', () => {
-			cy.get('#hud-chat-global').should('be.visible');
-			cy.get('#hud-chat-trade').should('not.be.visible');
-			cy.get('#hud-chat-ally').should('not.be.visible');
+			cy.clickWithChecks(
+				'#hud-chat-channels li[chatChannel=hud-chat-trade]', {
+					invisibleBefore: ['#hud-chat-trade', '#hud-chat-ally'],
+					visibleBefore: ['#hud-chat-global'],
 
-			cy.get('#hud-chat-channels li[chatChannel=hud-chat-trade]').click();
+					invisibleAfter: ['#hud-chat-global', '#hud-chat-ally'],
+					visibleAfter: ['#hud-chat-trade'],
+				}
+			);
 
-			cy.get('#hud-chat-global').should('not.be.visible');
-			cy.get('#hud-chat-trade').should('be.visible');
-			cy.get('#hud-chat-ally').should('not.be.visible');
+			cy.clickWithChecks(
+				'#hud-chat-channels li[chatChannel=hud-chat-ally]', {
+					invisibleBefore: [],
+					visibleBefore: [],
 
-			cy.get('#hud-chat-channels li[chatChannel=hud-chat-ally]').click();
+					invisibleAfter: ['#hud-chat-global', '#hud-chat-trade'],
+					visibleAfter: ['#hud-chat-ally'],
+				}
+			);
 
-			cy.get('#hud-chat-global').should('not.be.visible');
-			cy.get('#hud-chat-trade').should('not.be.visible');
-			cy.get('#hud-chat-ally').should('be.visible');
+			cy.clickWithChecks(
+				'#hud-chat-channels li[chatChannel=hud-chat-global]', {
+					invisibleBefore: [],
+					visibleBefore: [],
 
-			cy.get('#hud-chat-channels li[chatChannel=hud-chat-global]').click();
-
-			cy.get('#hud-chat-global').should('be.visible');
-			cy.get('#hud-chat-trade').should('not.be.visible');
-			cy.get('#hud-chat-ally').should('not.be.visible');
+					invisibleAfter: ['#hud-chat-ally', '#hud-chat-trade'],
+					visibleAfter: ['#hud-chat-global'],
+				}
+			);
 		});
 
 		it('Send message', () => {

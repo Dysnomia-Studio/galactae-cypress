@@ -114,6 +114,7 @@ Cypress.Commands.add('togglePanelWithCloseBtn', (
 	button,
 	closeButton,
 	panels,
+	midCallBack=() => {},
 	force=false,
 ) => {
 	cy.clickWithChecks(
@@ -126,6 +127,8 @@ Cypress.Commands.add('togglePanelWithCloseBtn', (
 		},
 		force
 	);
+
+	midCallBack();
 
 	cy.clickWithChecks(
 		closeButton, {
@@ -142,12 +145,14 @@ Cypress.Commands.add('togglePanelWithCloseBtn', (
 Cypress.Commands.add('togglePanel', (
 	button,
 	panels,
+	midCallBack=() => {},
 	force=false,
 ) => {
 	cy.togglePanelWithCloseBtn(
 		button,
 		button,
 		panels,
+		midCallBack,
 		force
 	);
 });

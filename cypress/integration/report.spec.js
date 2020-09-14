@@ -5,32 +5,31 @@ describe('Reports', () => {
 
 	context('Shows/Hide', () => {
 		it('Show/Hide (Bottom button)', () => {
-			cy.get('#report-panel').should('not.be.visible');
 			cy.get('#hud-bottom-button-report').should('not.have.class', 'hud-bottom-active');
 
-			cy.get('#hud-bottom-button-report').click();
+			cy.togglePanel(
+				'#hud-bottom-button-report',
+				['#report-panel'],
+				() => {
+					cy.get('#hud-bottom-button-report').should('have.class', 'hud-bottom-active');
+				}
+			);
 
-			cy.get('#report-panel').should('be.visible');
-			cy.get('#hud-bottom-button-report').should('have.class', 'hud-bottom-active');
-
-			cy.get('#hud-bottom-button-report').click();
-
-			cy.get('#report-panel').should('not.be.visible');
 			cy.get('#hud-bottom-button-report').should('not.have.class', 'hud-bottom-active');
 		});
 
 		it('Show/Hide (Close button)', () => {
-			cy.get('#report-panel').should('not.be.visible');
 			cy.get('#hud-bottom-button-report').should('not.have.class', 'hud-bottom-active');
 
-			cy.get('#hud-bottom-button-report').click();
+			cy.togglePanelWithCloseBtn(
+				'#hud-bottom-button-report',
+				'#report-panel-close',
+				['#report-panel'],
+				() => {
+					cy.get('#hud-bottom-button-report').should('have.class', 'hud-bottom-active');
+				}
+			);
 
-			cy.get('#report-panel').should('be.visible');
-			cy.get('#hud-bottom-button-report').should('have.class', 'hud-bottom-active');
-
-			cy.get('#report-panel-close').click({ force: true });
-
-			cy.get('#report-panel').should('not.be.visible');
 			cy.get('#hud-bottom-button-report').should('not.have.class', 'hud-bottom-active');
 		});
 	});

@@ -5,32 +5,31 @@ describe('Alliance', () => {
 
 	context('Shows/Hide', () => {
 		it('Show/Hide (Bottom button)', () => {
-			cy.get('#alliances-panel').should('not.be.visible');
 			cy.get('#hud-bottom-button-alliances').should('not.have.class', 'hud-bottom-active');
 
-			cy.get('#hud-bottom-button-alliances').click();
+			cy.togglePanel(
+				'#hud-bottom-button-alliances',
+				['#alliances-panel'],
+				() => {
+					cy.get('#hud-bottom-button-alliances').should('have.class', 'hud-bottom-active');
+				}
+			);
 
-			cy.get('#alliances-panel').should('be.visible');
-			cy.get('#hud-bottom-button-alliances').should('have.class', 'hud-bottom-active');
-
-			cy.get('#hud-bottom-button-alliances').click();
-
-			cy.get('#alliances-panel').should('not.be.visible');
 			cy.get('#hud-bottom-button-alliances').should('not.have.class', 'hud-bottom-active');
 		});
 
 		it('Show/Hide (Close button)', () => {
-			cy.get('#alliances-panel').should('not.be.visible');
 			cy.get('#hud-bottom-button-alliances').should('not.have.class', 'hud-bottom-active');
 
-			cy.get('#hud-bottom-button-alliances').click();
+			cy.togglePanelWithCloseBtn(
+				'#hud-bottom-button-alliances',
+				'#alliances-close',
+				['#alliances-panel'],
+				() => {
+					cy.get('#hud-bottom-button-alliances').should('have.class', 'hud-bottom-active');
+				}
+			);
 
-			cy.get('#alliances-panel').should('be.visible');
-			cy.get('#hud-bottom-button-alliances').should('have.class', 'hud-bottom-active');
-
-			cy.get('#alliances-close').click();
-
-			cy.get('#alliances-panel').should('not.be.visible');
 			cy.get('#hud-bottom-button-alliances').should('not.have.class', 'hud-bottom-active');
 		});
 	});

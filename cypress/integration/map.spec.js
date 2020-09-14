@@ -5,44 +5,33 @@ describe('Map', () => {
 
 	context('Shows/Hide', () => {
 		it('Show/Hide (Bottom button)', () => {
-			cy.get('#hud-map').should('not.be.visible');
-			cy.get('#map-global-legend').should('not.be.visible');
-			cy.get('#map-system').should('not.be.visible');
 			cy.get('#hud-bottom-button-map').should('not.have.class', 'hud-bottom-active');
 
-			cy.get('#hud-bottom-button-map').click();
+			cy.togglePanel(
+				'#hud-bottom-button-map',
+				['#hud-map', '#map-global-legend'],
+				() => {
+					cy.get('#map-system').should('not.be.visible');
+					cy.get('#hud-bottom-button-map').should('have.class', 'hud-bottom-active');
+				}
+			);
 
-			cy.get('#hud-map').should('be.visible');
-			cy.get('#map-global-legend').should('be.visible');
-			cy.get('#map-system').should('not.be.visible');
-			cy.get('#hud-bottom-button-map').should('have.class', 'hud-bottom-active');
-
-			cy.get('#hud-bottom-button-map').click();
-
-			cy.get('#hud-map').should('not.be.visible');
-			cy.get('#map-global-legend').should('not.be.visible');
-			cy.get('#map-system').should('not.be.visible');
 			cy.get('#hud-bottom-button-map').should('not.have.class', 'hud-bottom-active');
 		});
 
 		it('Show/Hide (Close button)', () => {
-			cy.get('#hud-map').should('not.be.visible');
-			cy.get('#map-global-legend').should('not.be.visible');
-			cy.get('#map-system').should('not.be.visible');
 			cy.get('#hud-bottom-button-map').should('not.have.class', 'hud-bottom-active');
 
-			cy.get('#hud-bottom-button-map').click();
+			cy.togglePanelWithCloseBtn(
+				'#hud-bottom-button-map',
+				'#map-close',
+				['#hud-map', '#map-global-legend'],
+				() => {
+					cy.get('#map-system').should('not.be.visible');
+					cy.get('#hud-bottom-button-map').should('have.class', 'hud-bottom-active');
+				}
+			);
 
-			cy.get('#hud-map').should('be.visible');
-			cy.get('#map-global-legend').should('be.visible');
-			cy.get('#map-system').should('not.be.visible');
-			cy.get('#hud-bottom-button-map').should('have.class', 'hud-bottom-active');
-
-			cy.get('#map-close').click();
-
-			cy.get('#hud-map').should('not.be.visible');
-			cy.get('#map-global-legend').should('not.be.visible');
-			cy.get('#map-system').should('not.be.visible');
 			cy.get('#hud-bottom-button-map').should('not.have.class', 'hud-bottom-active');
 		});
 	});
