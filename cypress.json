@@ -3,5 +3,5 @@
   "viewportHeight": 720,
   "video": false,
   "screenshotOnRunFailure": false,
-  "numTestsKeptInMemory": 0,
+  "numTestsKeptInMemory": 0
 }
