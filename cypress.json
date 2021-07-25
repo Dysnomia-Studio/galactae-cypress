@@ -4,8 +4,4 @@
   "video": false,
   "screenshotOnRunFailure": false,
   "numTestsKeptInMemory": 0,
-  "firefoxGcInterval": {
-    "runMode": null,
-    "openMode": null
-  }
 }
