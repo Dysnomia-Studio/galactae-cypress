@@ -47,10 +47,10 @@ describe('Ranks', () => {
 			cy.get('#hud-ranks-close').click({ force: true });
 		});
 
-		it('Have a blue name', () => {
+		/*it('Have a blue name', () => {
 			cy.connect('https://00-dev.galactae.eu/ranks.php', false, false);
 
 			cy.get('.rank-name em').should('have.text', 'ElanisTest');
-		});
+		});*/
 	});
 });
