@@ -68,7 +68,8 @@ Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=true, tutorialChe
 
 					invisibleAfter: ['#tutorial-panel'],
 					visibleAfter: [],
-				}
+				},
+				true
 			);
 
 			cy.clickWithChecks(
