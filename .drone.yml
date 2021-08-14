@@ -2,6 +2,13 @@ kind: pipeline
 name: galactae-cypress
 
 steps:
+- name: tests-chrome91-ff89
+  image: cypress/browsers:node14.17.0-chrome91-ff89
+  commands:
+  - npm ci
+  - $(npm bin)/cypress run --browser firefox
+  - $(npm bin)/cypress run --browser chrome
+
 - name: tests-chrome89-ff86
   image: cypress/browsers:node14.16.0-chrome89-ff86
   commands:
@@ -13,21 +20,18 @@ steps:
   image: cypress/browsers:node12.18.3-chrome87-ff82
   commands:
   - npm ci
-  - $(npm bin)/cypress run --browser firefox
   - $(npm bin)/cypress run --browser chrome
 
 - name: tests-chrome83-ff77
   image: cypress/browsers:node12.18.0-chrome83-ff77
   commands:
   - npm ci
-  - $(npm bin)/cypress run --browser firefox
   - $(npm bin)/cypress run --browser chrome
 
 - name: tests-chrome81-ff75
   image: cypress/browsers:node13.8.0-chrome81-ff75
   commands:
   - npm ci
-  - $(npm bin)/cypress run --browser firefox
   - $(npm bin)/cypress run --browser chrome
 
 - name: discord

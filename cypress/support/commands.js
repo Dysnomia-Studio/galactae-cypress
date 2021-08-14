@@ -61,6 +61,8 @@ Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=true, tutorialChe
 		cy.wait(500);
 
 		if(tutorialCheck) {
+			cy.wait(1000);
+
 			cy.clickWithChecks(
 				'#tutorial-panel-ok', {
 					invisibleBefore: ['#loading-overlay-back'],
