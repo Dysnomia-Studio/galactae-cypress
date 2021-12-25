@@ -36,16 +36,16 @@ Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=true, tutorialChe
 
 		// Assign user cookie
 		if(Cypress.platform === 'win32') { // Dev computer
-			cy.setCookie('galactae-phpsessid', '***REMOVED***');
+			cy.setCookie('galactae-phpsessid', 'fj4jhmbbmor59soocs3cg6fvf9');
 
 		} else if (Cypress.isBrowser('chrome')) { // CI Chrome
-			cy.setCookie('galactae-phpsessid', '***REMOVED***');
+			cy.setCookie('galactae-phpsessid', 'c437thg0gs8gm2fj8p6fg2d3jt');
 
 		} else if (Cypress.isBrowser('firefox')) { // CI Firefox
-			cy.setCookie('galactae-phpsessid', '***REMOVED***');
+			cy.setCookie('galactae-phpsessid', 'c437thg0gs8gm2fj8p6fg2d3ju');
 
 		} else if (Cypress.isBrowser('electron')) { // CI Electron
-			cy.setCookie('galactae-phpsessid', '***REMOVED***');
+			cy.setCookie('galactae-phpsessid', 'fj4jhmbbmor59soocs3cg6fvf9');
 
 		}
 
@@ -58,10 +58,10 @@ Cypress.Commands.add('connect', (destinationUrl, exactURLMatch=true, tutorialChe
 		// Visit
 		cy.visit(destinationUrl);
 
-		cy.wait(500);
+		cy.wait(1000);
 
 		if(tutorialCheck) {
-			cy.wait(1000);
+			cy.wait(2000);
 
 			cy.clickWithChecks(
 				'#tutorial-panel-ok', {
